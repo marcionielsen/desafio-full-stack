@@ -1,9 +1,9 @@
 package com.nielsen.desafiofullstack.app.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +11,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -33,9 +32,8 @@ public class Empresa implements Serializable {
 	@Column(name = "NOME_FANTASIA", nullable=false)
 	private String nomeFantasia;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_EMPRESA")
-	private Set<EnderecoEmpresa> enderecos = new HashSet<>();
+	@OneToMany(mappedBy = "empresa",fetch = FetchType.LAZY)
+	private List<EnderecoEmpresa> enderecos = new ArrayList<>();
 
 	public Empresa() {
 	}
@@ -70,11 +68,11 @@ public class Empresa implements Serializable {
 		this.nomeFantasia = nomeFantasia;
 	}
 
-	public Set<EnderecoEmpresa> getEnderecos() {
+	public List<EnderecoEmpresa> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(Set<EnderecoEmpresa> enderecos) {
+	public void setEnderecos(List<EnderecoEmpresa> enderecos) {
 		this.enderecos = enderecos;
 	}
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.nielsen.desafiofullstack.app.services.EmpresaService;
@@ -24,24 +25,24 @@ public class EmpresaResource {
 	private EmpresaService empresaService;
 	
 	@GetMapping(path = "/")
-	public String listAll() {
-		return "Get List All Method OK!";
+	public String listAll() throws JsonProcessingException {		
+		return empresaService.listAll(); 
 	}
 	
 	@GetMapping(path = "/{id}")
-	public String listCompanyById(@PathVariable String id) {
-		return "Company retrieved By Id: " + id;
+	public String listCompanyById(@PathVariable Long id) throws JsonProcessingException {
+		return empresaService.listCompanyById(id); 
 	}
 	
 	@DeleteMapping(path = "/{id}")
-	public String deleteCompanyById(@PathVariable String id) {
-		return "Company deleted By Id: " + id;
+	public String deleteCompanyById(@PathVariable Long id) {
+		return empresaService.deleteCompany(id); 
 	}
 
 	@PutMapping(path = "/{id}")
-	public String updateCompanyById(@PathVariable String id, @RequestBody String body) {
+	public String updateCompanyById(@PathVariable Long id, @RequestBody String body) throws Exception {
 		System.out.println("#### Objeto recebido: " + body);
-		return "Company updated By Id: " + id;
+		return empresaService.updateCompany(id, body);  
 	}
 
 	@PostMapping(path = "/")
@@ -54,19 +55,17 @@ public class EmpresaResource {
 		return "Company created successfully! - " + empresaCadastrada;
 	}
 
-	@DeleteMapping(path = "/endereco/{id}")
-	public String deleteCompanyAddressById(@PathVariable String id) {
-		return "Company Address deleted By Id: " + id;
-	}
-
-	@PostMapping(path = "/endereco")
-	public String createCompanyAddress(@RequestBody String body) {
+	@PostMapping(path = "/{idEmpresa}/endereco")
+	public String createCompanyAddress(@PathVariable Long idEmpresa, @RequestBody String body) throws StreamReadException, DatabindException, IOException {
 		 
 		System.out.println("#### Objeto recebido: " + body);
 		 
-		return "Company Address created successfully!";
+		return empresaService.createCompanyAddress(idEmpresa, body); 
 	}
-	
-	
-	
+
+	@DeleteMapping(path = "/{idEmpresa}/endereco/{id}")
+	public String deleteCompanyAddressById(@PathVariable Long idEmpresa, @PathVariable Long id) throws Exception {
+		return empresaService.deleteCompanyAddress(idEmpresa, id); 
+	}
+
 }

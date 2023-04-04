@@ -1,14 +1,14 @@
 package com.nielsen.desafiofullstack.app.dto;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmpresaDTO {
 
 	private Long id;
 	private String cnpj;
 	private String nomeFantasia;
-	private Set<EnderecoEmpresaDTO> enderecos = new HashSet<>(); 
+	private List<EnderecoEmpresaDTO> enderecos = new ArrayList<>(); 
 		
 	public EmpresaDTO() {
 	}
@@ -37,11 +37,11 @@ public class EmpresaDTO {
 		this.nomeFantasia = nomeFantasia;
 	}
 
-	public Set<EnderecoEmpresaDTO> getEnderecos() {
+	public List<EnderecoEmpresaDTO> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(Set<EnderecoEmpresaDTO> enderecos) {
+	public void setEnderecos(List<EnderecoEmpresaDTO> enderecos) {
 		this.enderecos = enderecos;
 	}
 	

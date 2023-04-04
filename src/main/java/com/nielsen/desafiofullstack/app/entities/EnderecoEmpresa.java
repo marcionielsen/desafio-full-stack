@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,7 +44,25 @@ public class EnderecoEmpresa implements Serializable {
 	@Column(name = "COMPLEMENTO")
 	private String complemento;
 
+	@ManyToOne
+	@JoinColumn(name = "ID_EMPRESA")
+	private Empresa empresa;
+	
 	public EnderecoEmpresa() {
+	}
+
+	public EnderecoEmpresa(Long id, String cep, String uf, String cidade, String bairro, String logradouro,
+			String numero, String complemento, Empresa empresa) {
+		super();
+		this.id = id;
+		this.cep = cep;
+		this.uf = uf;
+		this.cidade = cidade;
+		this.bairro = bairro;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.empresa = empresa;
 	}
 
 	public Long getId() {
@@ -109,6 +129,14 @@ public class EnderecoEmpresa implements Serializable {
 		this.complemento = complemento;
 	}
 
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(cep, id);
@@ -129,7 +157,8 @@ public class EnderecoEmpresa implements Serializable {
 	@Override
 	public String toString() {
 		return "EnderecoEmpresa [id=" + id + ", cep=" + cep + ", uf=" + uf + ", cidade=" + cidade + ", bairro=" + bairro
-				+ ", logradouro=" + logradouro + ", numero=" + numero + ", complemento=" + complemento + "]";
+				+ ", logradouro=" + logradouro + ", numero=" + numero + ", complemento=" + complemento + ", empresa=[id=" + empresa.getId().longValue() + 
+				", cnpj=" + empresa.getCnpj() + ", nomeFantasia=" + empresa.getNomeFantasia() + " ] ]";
 	}
 	
 }
