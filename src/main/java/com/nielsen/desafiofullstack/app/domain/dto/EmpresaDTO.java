@@ -1,4 +1,4 @@
-package com.nielsen.desafiofullstack.app.dto;
+package com.nielsen.desafiofullstack.app.domain.dto;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.nielsen.desafiofullstack.app.entities;
+package com.nielsen.desafiofullstack.app.domain.entities;
 
 import java.io.Serializable;
 import java.util.Objects;

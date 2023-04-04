@@ -13,10 +13,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nielsen.desafiofullstack.app.dto.EmpresaDTO;
-import com.nielsen.desafiofullstack.app.dto.EnderecoEmpresaDTO;
-import com.nielsen.desafiofullstack.app.entities.Empresa;
-import com.nielsen.desafiofullstack.app.entities.EnderecoEmpresa;
+import com.nielsen.desafiofullstack.app.domain.dto.EmpresaDTO;
+import com.nielsen.desafiofullstack.app.domain.dto.EnderecoEmpresaDTO;
+import com.nielsen.desafiofullstack.app.domain.entities.Empresa;
+import com.nielsen.desafiofullstack.app.domain.entities.EnderecoEmpresa;
 import com.nielsen.desafiofullstack.app.repositories.EmpresaRepository;
 import com.nielsen.desafiofullstack.app.repositories.EnderecoEmpresaRepository;
 

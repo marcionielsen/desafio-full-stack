@@ -1,4 +1,4 @@
-package com.nielsen.desafiofullstack.app.dto;
+package com.nielsen.desafiofullstack.app.domain.dto;
 
 public class EnderecoEmpresaDTO {
 

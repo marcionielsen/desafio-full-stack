@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.nielsen.desafiofullstack.app.entities.Empresa;
-import com.nielsen.desafiofullstack.app.entities.EnderecoEmpresa;
+import com.nielsen.desafiofullstack.app.domain.entities.Empresa;
+import com.nielsen.desafiofullstack.app.domain.entities.EnderecoEmpresa;
 
 public interface EnderecoEmpresaRepository extends JpaRepository<EnderecoEmpresa, Long> {
 
