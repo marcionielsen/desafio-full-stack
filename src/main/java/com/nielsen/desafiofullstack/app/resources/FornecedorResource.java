@@ -26,23 +26,23 @@ public class FornecedorResource {
 
 	@GetMapping(path = "/")
 	public String listAll() throws JsonProcessingException {		
-		return ""; // fornecedorService.listAll(); 
+		return fornecedorService.listAll(); 
 	}
 	
 	@GetMapping(path = "/{id}")
 	public String listSupplierById(@PathVariable Long id) throws JsonProcessingException {
-		return ""; //fornecedorService.listSupplierById(id); 
+		return fornecedorService.listSupplierById(id); 
 	}
 	
 	@DeleteMapping(path = "/{id}")
 	public String deleteSupplierById(@PathVariable Long id) {
-		return ""; //fornecedorService.deleteSupplier(id); 
+		return fornecedorService.deleteSupplier(id); 
 	}
 
 	@PutMapping(path = "/{id}")
 	public String updateSupplierById(@PathVariable Long id, @RequestBody String body) throws Exception {
 		System.out.println("#### Objeto recebido: " + body);
-		return ""; //fornecedorService.updateSupplier(id, body);  
+		return fornecedorService.updateSupplier(id, body);  
 	}
 
 	@PostMapping(path = "/")
@@ -50,9 +50,9 @@ public class FornecedorResource {
 		 
 		System.out.println("#### Objeto recebido: " + body);
 		
-//		long fornecedorCadastrado = fornecedorService.saveSupplier(body);
+		long fornecedorCadastrado = fornecedorService.saveSupplier(body);
 		
-		return ""; //"Supplier created successfully! - " + fornecedorCadastrado;
+		return "Supplier created successfully! - " + fornecedorCadastrado;
 	}
 
 	@PostMapping(path = "/{idFornecedor}/endereco")
@@ -60,12 +60,12 @@ public class FornecedorResource {
 		 
 		System.out.println("#### Objeto recebido: " + body);
 		 
-		return ""; //fornecedorService.createSupplierAddress(idFornecedor, body); 
+		return fornecedorService.createSupplierAddress(idFornecedor, body); 
 	}
 
 	@DeleteMapping(path = "/{idFornecedor}/endereco/{id}")
 	public String deleteSupplierAddressById(@PathVariable Long idFornecedor, @PathVariable Long id) throws Exception {
-		return ""; //fornecedorService.deleteSupplierAddress(idFornecedor, id); 
+		return fornecedorService.deleteSupplierAddress(idFornecedor, id); 
 	}
 	
 }

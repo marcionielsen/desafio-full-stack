@@ -130,8 +130,6 @@ public class EmpresaService {
 		
 		List<EnderecoEmpresaDTO> enderecosDTO = empresaDto.getEnderecos();
 		
-//		List<EnderecoEmpresa> enderecos = new ArrayList<>();
-		
 		System.out.println("######[ EmpresaDTO ]######");
 		System.out.println("CNPJ: " + empresaDto.getCnpj());
 		System.out.println("NOME: " + empresaDto.getNomeFantasia());
@@ -153,19 +151,7 @@ public class EmpresaService {
 			System.out.println("NUMERO     : " + enderecoEmpresaDTO.getNumero());
 			System.out.println("COMPLEMENTO: " + enderecoEmpresaDTO.getComplemento());
 			
-			EnderecoEmpresa endereco = this.fillEnderecoEmpresa(empresaNova, enderecoEmpresaDTO); //new EnderecoEmpresa();
-			
-//			endereco.setBairro(enderecoEmpresaDTO.getBairro());
-//			endereco.setCep(enderecoEmpresaDTO.getCep());
-//			endereco.setCidade(enderecoEmpresaDTO.getCidade());
-//			endereco.setComplemento(enderecoEmpresaDTO.getComplemento());
-//			endereco.setLogradouro(enderecoEmpresaDTO.getLogradouro());
-//			endereco.setNumero(enderecoEmpresaDTO.getNumero());
-//			endereco.setUf(enderecoEmpresaDTO.getUf());
-//		
-//			endereco.setEmpresa(empresaNova);
-//			
-//			enderecos.add(endereco);
+			EnderecoEmpresa endereco = this.fillEnderecoEmpresa(empresaNova, enderecoEmpresaDTO); 
 			
 			enderecoEmpresaRepository.save(endereco); 
 		}
