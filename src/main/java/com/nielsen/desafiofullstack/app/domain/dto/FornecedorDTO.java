@@ -1,16 +1,25 @@
 package com.nielsen.desafiofullstack.app.domain.dto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FornecedorDTO {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+public class FornecedorDTO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String cnpjCpf;
 	private Integer tipoPessoa;
 	private String numeroRg;
+	
+    @JsonInclude(Include.NON_NULL)
 	private LocalDateTime dataNascimento;
+    
 	private String nome;
 	private String email;
 	private List<EnderecoFornecedorDTO> enderecos = new ArrayList<>(); 

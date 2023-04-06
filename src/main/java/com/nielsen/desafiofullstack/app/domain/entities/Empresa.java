@@ -11,6 +11,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -35,6 +38,12 @@ public class Empresa implements Serializable {
 	@OneToMany(mappedBy = "empresa",fetch = FetchType.LAZY)
 	private List<EnderecoEmpresa> enderecos = new ArrayList<>();
 
+	@ManyToMany
+	@JoinTable(name = "EMPRESA_FORNECEDOR",
+	        joinColumns = { @JoinColumn(name = "ID_EMPRESA") },
+	        inverseJoinColumns = { @JoinColumn(name = "ID_FORNECEDOR") })
+	private List<Fornecedor> fornecedores = new ArrayList<>();
+	
 	public Empresa() {
 	}
 
@@ -74,6 +83,14 @@ public class Empresa implements Serializable {
 
 	public void setEnderecos(List<EnderecoEmpresa> enderecos) {
 		this.enderecos = enderecos;
+	}
+	
+	public List<Fornecedor> getFornecedores() {
+		return fornecedores;
+	}
+
+	public void setFornecedores(List<Fornecedor> fornecedores) {
+		this.fornecedores = fornecedores;
 	}
 
 	@Override

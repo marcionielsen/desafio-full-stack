@@ -12,6 +12,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -33,10 +34,10 @@ public class Fornecedor implements Serializable {
 	@Column(name = "TIPO_PESSOA", nullable=false)
 	private Integer tipoPessoa;
 	
-	@Column(name = "NUMERO_RG", nullable=false)
+	@Column(name = "NUMERO_RG")
 	private String numeroRg;
 	
-	@Column(name = "DATA_NASCIMENTO", nullable=false)
+	@Column(name = "DATA_NASCIMENTO")
 	private LocalDateTime dataNascimento;
 	
 	@Column(name = "NOME", nullable=false)
@@ -47,6 +48,9 @@ public class Fornecedor implements Serializable {
 	
 	@OneToMany(mappedBy = "fornecedor",fetch = FetchType.LAZY)
 	private List<EnderecoFornecedor> enderecos = new ArrayList<>();
+	
+	@ManyToMany(mappedBy = "fornecedores")
+	private List<Empresa> clientes = new ArrayList<>();
 
 	public Fornecedor() {
 	}
@@ -124,6 +128,14 @@ public class Fornecedor implements Serializable {
 
 	public void setEnderecos(List<EnderecoFornecedor> enderecos) {
 		this.enderecos = enderecos;
+	}
+	
+	public List<Empresa> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Empresa> clientes) {
+		this.clientes = clientes;
 	}
 
 	@Override

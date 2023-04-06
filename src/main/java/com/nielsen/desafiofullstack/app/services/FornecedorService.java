@@ -18,6 +18,7 @@ import com.nielsen.desafiofullstack.app.domain.dto.EnderecoFornecedorDTO;
 import com.nielsen.desafiofullstack.app.domain.dto.FornecedorDTO;
 import com.nielsen.desafiofullstack.app.domain.entities.EnderecoFornecedor;
 import com.nielsen.desafiofullstack.app.domain.entities.Fornecedor;
+import com.nielsen.desafiofullstack.app.domain.enums.TipoPessoa;
 import com.nielsen.desafiofullstack.app.repositories.EnderecoFornecedorRepository;
 import com.nielsen.desafiofullstack.app.repositories.FornecedorRepository;
 
@@ -91,7 +92,9 @@ public class FornecedorService {
 		Fornecedor fornecedor = opFornecedor.orElse(null);
 		
 		if (fornecedor != null) {
-
+			
+			validarTipoPessoa(fornecedorDto);
+			
 			List<EnderecoFornecedorDTO> listaEnderecosDto = fornecedorDto.getEnderecos();
 			for (EnderecoFornecedorDTO enderecoFornecedorDTO : listaEnderecosDto) {
 				
@@ -126,12 +129,20 @@ public class FornecedorService {
 		
 	}
 	
-	public long saveSupplier(String jsonObj) throws StreamReadException, DatabindException, IOException {
+	private void validarTipoPessoa(FornecedorDTO fornecedorDto) throws Exception {
+		
+		if (TipoPessoa.toEnum(fornecedorDto.getTipoPessoa()).equals(TipoPessoa.PESSOAFISICA) && fornecedorDto.getDataNascimento() == null && fornecedorDto.getNumeroRg().isBlank()) {
+			throw new Exception("Para cadastrar fornecedor do tipo Pessoa Física é obrigatório informar RG e Data de Nascimento!");
+		}
+	}
+	
+	public long saveSupplier(FornecedorDTO body) throws Exception {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		
 		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.findAndRegisterModules();
 		
-		FornecedorDTO fornecedorDto = objectMapper.readValue(jsonObj.getBytes(), FornecedorDTO.class);
+		FornecedorDTO fornecedorDto = body; // objectMapper.readValue(jsonObj.getBytes(), FornecedorDTO.class);
 		
 		List<EnderecoFornecedorDTO> enderecosDTO = fornecedorDto.getEnderecos();
 		
@@ -139,10 +150,19 @@ public class FornecedorService {
 		System.out.println("CNPJ : " + fornecedorDto.getCnpjCpf());
 		System.out.println("NOME : " + fornecedorDto.getNome());
 		System.out.println("EMAIL: " + fornecedorDto.getEmail());
-		System.out.println("RG   : " + fornecedorDto.getNumeroRg());
-		System.out.println("DATA : " + fornecedorDto.getDataNascimento().format(formatter));
+		
+		if (fornecedorDto.getNumeroRg() != null && !fornecedorDto.getNumeroRg().isEmpty() ) {
+			System.out.println("RG   : " + fornecedorDto.getNumeroRg());
+		}
+		
+		if (fornecedorDto.getDataNascimento() != null) { 
+			System.out.println("DATA : " + fornecedorDto.getDataNascimento().format(formatter));
+		}
+		
 		System.out.println("TIPO : " + fornecedorDto.getTipoPessoa());
 
+		validarTipoPessoa(fornecedorDto);
+		
 		Fornecedor fornecedor = this.fillFornecedor(fornecedorDto); 
 		
 		Fornecedor fornecedorNovo = fornecedorRepository.save(fornecedor);
